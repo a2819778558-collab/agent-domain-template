@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.company.agent</groupId>
+    <artifactId>agent-domain-template</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>agent-domain-template</name>
+    <description>多域 Agent「域插件契约」参考骨架：把域从 agent 内核里解耦出来</description>
+
+    <!--
+      说明：本骨架刻意不引入任何第三方依赖（纯 JDK），目的是让「架构」本身一眼看清。
+      接入你们真实的 agent-framework-java-v2 时：
+        - DomainPlugin 的实现类加 @Component，DomainRegistry 改成注入 List<DomainPlugin>
+        - ToolSpec 的实现内部包装 LangChain4j 的 @Tool 方法（见 README 的映射表）
+        - 关键词路由 KeywordRouter 换成「规则 + 向量 + LLM 结构化分类」的级联实现
+    -->
+
+    <properties>
+        <maven.compiler.release>17</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <mainClass>com.company.agent.app.DomainTemplateApp</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

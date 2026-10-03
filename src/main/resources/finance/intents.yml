@@ -1,0 +1,52 @@
+# ============================================================
+# 财务域 · 意图表 (intent taxonomy)
+# ------------------------------------------------------------
+# 谁维护：财务组业务专家（改这个文件不用改代码）
+# 谁使用：路由器（决定进哪个域）、评测集（判断答得对不对）
+#
+# 字段说明：
+#   id        意图唯一标识，建议 <域>.<动作>
+#   name      中文名
+#   taskType  任务类型：tool(要调工具) | rag(查知识库) | chat(闲聊) | handoff(转人工)
+#   examples  真实用户可能的问法（路由器做向量匹配时就用这些）
+#   tools     这个意图下允许使用的工具
+# ============================================================
+domain: finance
+displayName: 财务
+
+intents:
+  - id: finance.arrears
+    name: 查询保单欠费明细
+    taskType: tool
+    examples:
+      - 我这张保单有没有欠费
+      - 欠了多少钱
+      - 还剩几期没交
+      - 帮我看下有没有逾期
+    tools:
+      - finance.queryArrears
+
+  - id: finance.lateFee
+    name: 计算滞纳金与利息
+    taskType: tool
+    examples:
+      - 滞纳金怎么算
+      - 利息是多少
+      - 逾期要交多少钱
+    tools:
+      - finance.calcLateFee
+
+  - id: finance.reimbursement
+    name: 查询费用报销进度
+    taskType: tool
+    examples:
+      - 报销到哪一步了
+      - 发票报没报
+      - 我的报销单什么状态
+    tools:
+      - finance.queryReimbursement
+
+# 兜底：命中不了任何意图时
+fallback:
+  strategy: handoff
+  group: 财务组

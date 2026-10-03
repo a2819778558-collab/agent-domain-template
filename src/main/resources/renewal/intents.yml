@@ -1,0 +1,29 @@
+# ============================================================
+# 续期域 · 意图表（模板，待续期组业务专家确认）
+# ============================================================
+domain: renewal
+displayName: 续期
+
+intents:
+  - id: renewal.status
+    name: 查询保单续期状态
+    taskType: tool
+    examples:
+      - 我的保单什么时候到期
+      - 续期成功了吗
+      - 下一期什么时候扣费
+    tools:
+      - renewal.queryStatus
+
+  - id: renewal.premium
+    name: 计算续期应缴保费
+    taskType: tool
+    examples:
+      - 这一期要交多少钱
+      - 换成月交多少钱
+    tools:
+      - renewal.calcPremium
+
+fallback:
+  strategy: handoff
+  group: 续期组

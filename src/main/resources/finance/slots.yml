@@ -1,0 +1,28 @@
+# ============================================================
+# 财务域 · 槽位（实体）定义
+# ------------------------------------------------------------
+# 作用：路由命中意图后，还要把执行工具必需的参数抽出来。
+#       缺失的槽位直接触发「追问用户」，省一轮对话。
+# 用法：和意图识别放在同一次 LLM 结构化输出里一起抽。
+# ============================================================
+domain: finance
+
+slots:
+  - name: policyNo
+    type: string
+    description: 保单号
+    requiredFor:
+      - finance.arrears
+      - finance.lateFee
+    patterns:
+      - "^P\\d{8}$"          # 示例格式，按真实规则改
+    askWhenMissing: 请提供你的保单号，我帮你查一下。
+
+  - name: orderNo
+    type: string
+    description: 报销单号
+    requiredFor:
+      - finance.reimbursement
+    patterns:
+      - "^R\\d{8}$"
+    askWhenMissing: 请提供报销单号，我帮你查进度。
