@@ -132,3 +132,9 @@ mvn -q compile exec:java
 
 > 详见 `docs/域接入登记表.md`——给业务专家填的表。
 > 进度和踩坑记录在 `docs/日志.md`。
+
+---
+
+## 实践记录（连载）
+
+- **01** 一个域一份 prompt 的 Agent，我做到第二个域就接不下去了 —— https://juejin.cn/post/7691859218202705961
